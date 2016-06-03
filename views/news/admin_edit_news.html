@@ -1,0 +1,75 @@
+<section class="services" id="SERVICE">
+    <div class="container">
+        <div class="row">
+<?php //print_r($_POST);?>
+            <div class="col-md-12 ">
+                <div class="single_service wow fadeInUp" data-wow-delay="1s">
+                    <h1><?php if($data[news]){echo "редактировать";}else{echo "добавить";}?> статью</h1>
+                    <?php if (Session::hasFlash()){ ?>
+
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+
+                            <?php Session::flash()?>
+
+                        </div>
+                    </div>
+                    <?php }?>
+                    <form action="" method="post" enctype="multipart/form-data"  class="form-edit">
+                        <div class="col-lg-6">
+
+                            заголовок <input class="form-control" type="text" name = "title" value="<?=$data[news][0][title];?>">
+                            <hr>
+                            текст<textarea rows="14"  class="form-control"  name = "content"><?=$data[news][0][content];?></textarea>
+                            <hr>
+                        </div>
+                        <div class="col-lg-6">
+                            алиас<input class="form-control" type="text" name = "alias" value="<?=$data[news][0][alias];?>">
+                            <hr>
+
+                            Опубликовано?
+                            <input name="is_active" type="radio" value="1" <?php if($data[news][0][is_active] == 1){echo "checked";}?> >да
+                            <input name="is_active" type="radio" value="0" <?php if($data[news][0][is_active] == 0){echo "checked";}?>>нет
+                            <hr>
+
+                            Категория
+
+                            <select name="id_category">
+                                <?php foreach($data[catlist] as $catlist){?>
+                                <option value="<?=$catlist[id_category];?>" <?php if($data[news][0][id_category]==$catlist[id_category]){echo selected;}?> "><?=$catlist[title];?></option>
+
+                                <?php }?>
+                            </select>
+                            <hr>
+                            Теги
+                            <select name="tags[]" multiple size="10">
+                                <?php foreach($data[tags] as $tags){?>
+                                <option value="<?=$tags[id_tegs];?>"  <?php if($data[news]){
+                                foreach ($data[select_tags] as $select_tags){
+                                 if($tags[id_tegs]==$select_tags[id_tegs])
+                                 {echo selected;}
+                                 }}?>><?=$tags[name];?></option>
+
+                                <?php }?>
+                            </select>
+                            <hr>
+                            </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p class="text-center"> <button type="submit" class="btn btn-success">Сохранить</button>
+                    </form>
+                </p>
+                <br>
+            </div>
+
+        </div>
+
+
+
+
+</section>

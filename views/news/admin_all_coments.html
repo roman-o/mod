@@ -1,0 +1,41 @@
+<section class="services" id="SERVICE">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 ">
+                <div class="single_service wow fadeInUp" data-wow-delay="1s"><br>
+
+                    <h1>Редактировать коментарии</h1>
+
+                </div>
+
+            </div>
+
+            <?php
+//print_r($data[coments]);
+            foreach($data[coments] as  $h) {
+if( $h[is_active]!='0'){?>
+            <div class="row">
+
+                <div class="col-md-2 "><span class="text-uppercase">
+            <?=$h[email].":";?></span>
+                   <br> новость:<a href="/news/view/<?=$h[id_news];?>" target="_blank"><?php echo substr($h[news_name], 0, 12);?>;...</a>
+                  <br> статус: <?php if($h[is_active] == 1){echo "активный";}else{echo "неактивный";}?>
+                </div>
+
+                <div class="col-md-4 "><?=$h[text];?>
+                </div>
+                <div class="col-md-4 ">
+
+
+
+                     <a href="/admin/news/edit_coments/<?=$h[id_coments];?>" > редактировать </a>
+                </div>
+
+            </div>
+            <hr>
+            <? } }?>
+
+            </div>
+
+        </div>

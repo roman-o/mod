@@ -1,0 +1,82 @@
+<section class="services" id="SERVICE">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+<?// print_r($data);?>
+            <div style="margin-top: 20px; margin-bottom: 20px;">
+                <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" style="margin-top: 20px;">
+                    <!-- Carousel indicators -->
+
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <?php
+                     $cnt = -1;
+                    foreach($data[slaider] as $slide){
+                    $cnt++;
+                    //echo $cnt;}
+                    ?>
+                        <div class="<?if($cnt==0){echo 'active';}?> item" style=" text-align: center; height: 200px !important;">
+
+                            <div class="carousel-caption">
+                                <div class="col-md-4"> <img src="/webroot/img/news/<?=$slide[img_news];?>.jpg" class="img-responsive" alt="<?=($slide[title]);?>"></div>
+
+                                <div class="col-md-6">  <h3><a href="/news/view/<?=$slide[id_news];?>" ><?=$slide[title];?></a></h3></div>
+
+                            </div>
+                        </div>
+
+                        <?php }?>
+                    </div>
+  </div>
+                </div>
+        <div class="row">
+            <div class="col-md-3 ">
+                <h4>Топ коментаторы:</h4>
+                 <?php foreach ($data['topcoment'] as $topcoment){?>
+              <a href="/news/coments/<?= $topcoment[id_user];?>"><?= $topcoment[email];?> </a> <?= $topcoment[r];?> комен.<br>
+                <?}?>
+                </div>
+
+            <div class="col-md-6 ">
+
+Hello <?php print_r( Session::get('email'));
+//print_r($_SESSION);
+?>
+                <?php
+
+            foreach($data['news'] as $key=> $h) {?>
+                <div class="single_service wow fadeInUp" data-wow-delay="1s">
+<h1><a href=" http://modul/news/category/<?=$key?>"><?=$h[0][titlecat];?></h1></a>
+
+
+                    <?php
+
+            foreach($h as $news_data) {?>
+
+                    <a href="/news/view/<?=$news_data[id_news]?>"><?=($news_data[title]);?></a><br>
+
+
+
+
+
+
+                    <?php }?>
+                </div>
+                <?php }?>
+            </div>
+            <div class="col-md-3 ">
+                <h4>Топ статье:</h4>
+                <?php foreach ($data['topnews'] as $topnews){?>
+                <a href="/news/view/<?= $topnews[id_news];?>"><?= $topnews[title];?> </a> <?= $topnews[cnt];?> комен.<br>
+                <?}?>
+            </div>
+        </div>
+
+
+
+
+
+</section>
+
+
+

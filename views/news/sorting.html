@@ -1,0 +1,106 @@
+<?php  if ($_POST[mounth]){
+                  Router::redirect("/news/sorting/$_POST[mounth]");
+                    }
+                    ?>
+<script type="text/javascript" language="javascript">
+    fireSubmit = function(event) {
+        document.forms["Sort"].submit();
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var cnt = 0;
+        $("#content > input:checkbox:checked").each(function(){
+            cnt++;
+        })
+        var allCheckboxes = $("#content input:checkbox");
+        $("#content > input").change(function(){
+            if(this.checked) {cnt++;}
+            else{cnt -= 1 ;}
+            if(cnt >= 3){
+                var notChecked = allCheckboxes.not(':checked');
+                $("#content > input:checkbox:checked").each(function(){
+                    $(notChecked).attr('disabled',true);
+                })
+            }
+            else{
+                $("#content > input:checkbox:checked").each(function(){
+                    $(allCheckboxes).attr('disabled',false);
+                })
+            }
+
+            $("#images").text(cnt);
+        })
+
+    });
+</script>
+
+<?php if ($_POST[mounth] == "5-2015"){ echo "selected";}?>
+<section class="services" id="SERVICE">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <?php  print_r($_POST);?>
+               <h3>Сортировка по дате:</h3>
+                <form name="Sort" action="" method="post">
+                    <select  onchange="fireSubmit(event)" name="mounth">
+                        <option value="null" <?php if (!$data[period][0]){ echo "selected";}?>>все время</option>
+                        <option value="5-2015" <?php if ($data[period][0] == "5-2015"){ echo "selected";}?>>май 2015</option>
+                        <option value="6-2015" <?php if ($data[period][0] == "6-2015"){ echo "selected";}?>>июнь 2015</option>
+                        <option value="7-2015" <?php if ($data[period][0] == "7-2015"){ echo "selected";}?>>июль 2015</option>
+                        <option value="8-2015" <?php if ($data[period][0] == "8-2015"){ echo "selected";}?>>август 2015</option>
+                        <option value="9-2015" <?php if ($data[period][0] == "9-2015"){ echo "selected";}?>>сентябрь 2015</option>
+                        <option value="10-2015" <?php if ($data[period][0] == "10-2015"){ echo "selected";}?>>октябрь 2015</option>
+                        <option value="11-2015" <?php if ($data[period][0] == "11-2015"){ echo "selected";}?>>ноябрь 2015</option>
+                        <option value="12-2015" <?php if ($data[period][0] == "12-2015"){ echo "selected";}?>>декабрь 2015</option>
+                        <option value="1-2016" <?php if ($data[period][0] == "1-2016"){ echo "selected";}?>>январь 2016</option>
+                        <option value="2-2016" <?php if ($data[period][0] == "2-2016"){ echo "selected";}?>>февраль 2016</option>
+                        <option value="3-2016" <?php if ($data[period][0] == "3-2016"){ echo "selected";}?>>март 2016</option>
+                        <option value="4-2016" <?php if ($data[period][0] == "4-2016"){ echo "selected";}?>>апрель 2016</option>
+                        <option value="5-2016" <?php if ($data[period][0] == "5-2016"){ echo "selected";}?>>май 2016</option>
+
+
+                    </select>
+
+
+
+                        <div id=content>
+                        <?php foreach($data[tags] as $tag){?>
+                           <?=$tag[name];?>  <input name="<?=$tag[name];?>" onchange="fireSubmit(event)"  type="checkbox">
+                         <?}?>
+
+
+                        </div>
+
+
+                </form>
+
+
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="single_service wow fadeInUp" data-wow-delay="1s">
+                    <?php
+
+            foreach($data['news'] as $news_data) {?>
+
+                    <a href="/news/view/<?=$news_data['id_news']?>"><?=($news_data[title]);?></a><br>
+
+
+
+
+
+
+                    <?php }?>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+</section>
